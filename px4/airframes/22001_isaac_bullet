@@ -1,0 +1,110 @@
+#!/bin/sh
+#
+# @name Bullet quad tailsitter (Isaac Sim, simulator_mavlink)
+#
+# @type VTOL Quad Tailsitter
+#
+# Body frame = PX4 multicopter (hover) frame, as for every PX4 tailsitter:
+#   x = belly (ventral side), y = starboard, z = aft along the fuselage (thrust along -z).
+#   A forward transition pitches thrust toward +x, so +x must be the belly to end up upright.
+#   Mapping from the FLU body frame: x_mc = -z_f, y_mc = -y_f, z_mc = -x_f.
+# Rotor positions are relative to the vehicle CG (x = -0.2935 m from the nose, FLU, incl. rotors;
+# base_link CG moved 20 mm forward in URDF rev 2026-10-14e),
+# for URDF rev 2026-10-14d (airframe rolled so the wing spans y).
+# KM = C_Q0 D / C_T0 = 0.0085 * 0.2275 / 0.12; sign = spin sense (hsquad_dynamics rotor_spin).
+#
+
+. ${R}etc/init.d/rc.vtol_defaults
+
+param set-default MAV_TYPE 20
+param set-default VT_TYPE 0
+
+param set-default CA_AIRFRAME 4
+param set-default CA_ROTOR_COUNT 4
+param set-default CA_ROTOR0_PX -0.1377
+param set-default CA_ROTOR0_PY -0.1377
+param set-default CA_ROTOR0_PZ 0.2548
+param set-default CA_ROTOR0_KM -0.0161
+param set-default CA_ROTOR1_PX 0.1377
+param set-default CA_ROTOR1_PY -0.1377
+param set-default CA_ROTOR1_PZ 0.2548
+param set-default CA_ROTOR1_KM 0.0161
+param set-default CA_ROTOR2_PX -0.1377
+param set-default CA_ROTOR2_PY 0.1377
+param set-default CA_ROTOR2_PZ 0.2548
+param set-default CA_ROTOR2_KM 0.0161
+param set-default CA_ROTOR3_PX 0.1377
+param set-default CA_ROTOR3_PY 0.1377
+param set-default CA_ROTOR3_PZ 0.2548
+param set-default CA_ROTOR3_KM -0.0161
+param set-default CA_SV_CS_COUNT 0
+
+param set-default PWM_MAIN_FUNC1 101
+param set-default PWM_MAIN_FUNC2 102
+param set-default PWM_MAIN_FUNC3 103
+param set-default PWM_MAIN_FUNC4 104
+
+# thrust ~ omega^2 ~ throttle^2 for this prop/motor
+param set-default THR_MDL_FAC 1.0
+param set-default MPC_THR_HOVER 0.5
+param set-default MPC_USE_HTE 1
+
+# multicopter (hover) attitude/rate loops, from the PX4 quadtailsitter
+param set-default MC_AIRMODE 2
+param set-default MAN_ARM_GESTURE 0
+param set-default MC_ROLL_P 3
+param set-default MC_PITCH_P 3
+param set-default MC_ROLLRATE_P 0.3
+param set-default MC_PITCHRATE_P 0.3
+
+# fixed-wing: no control surfaces, attitude by differential thrust on all axes
+param set-default VT_FW_DIFTHR_EN 7
+param set-default VT_FW_DIFTHR_S_Y 1
+param set-default VT_FW_DIFTHR_S_P 1
+param set-default VT_FW_DIFTHR_S_R 1
+param set-default FW_P_TC 0.6
+param set-default FW_PR_P 0.5
+param set-default FW_PR_I 0.3
+param set-default FW_PSP_OFF 2
+param set-default FW_RR_FF 0.1
+param set-default FW_RR_P 0.2
+param set-default FW_RR_I 0.1
+param set-default FW_YR_FF 0
+param set-default FW_YR_I 0
+
+# Bullet speeds: CL_max ~ 3.621 * 15 deg ~ 0.95 -> stall ~ 23 m/s at 3.45 kg, 0.1094 m^2
+param set-default FW_AIRSPD_STALL 23
+param set-default FW_AIRSPD_MIN 27
+param set-default FW_AIRSPD_TRIM 35
+param set-default FW_AIRSPD_MAX 60
+param set-default FW_THR_TRIM 0.3
+param set-default FW_THR_MIN 0.05
+param set-default FW_THR_MAX 1.0
+param set-default FW_T_CLMB_MAX 8
+param set-default FW_T_SINK_MAX 5
+param set-default FW_T_SINK_MIN 2
+param set-default FW_T_HRATE_FF 0.5
+
+param set-default VT_ARSP_TRANS 28
+param set-default VT_ARSP_BLEND 20
+param set-default VT_F_TRANS_DUR 3
+param set-default VT_B_TRANS_DUR 6
+param set-default VT_TRANS_TIMEOUT 20
+param set-default FD_FAIL_R 70
+param set-default WV_EN 0
+param set-default EKF2_FUSE_BETA 0
+param set-default SYS_HAS_NUM_ASPD 1
+
+param set-default MIS_TAKEOFF_ALT 30
+param set-default NAV_ACC_RAD 20
+
+# simulation: no RC, no GCS link required
+param set-default COM_RC_IN_MODE 4
+param set-default NAV_RCL_ACT 0
+param set-default NAV_DLL_ACT 0
+param set-default COM_RCL_EXCEPT 4
+param set-default SIM_BAT_MIN_PCT 50
+# PX4's own battery simulator (independent of hsquad_dynamics): drain slowly, no false low-battery failsafes
+param set-default SIM_BAT_DRAIN 3600
+# log from boot: starting the logger at arming coincided with PX4 SITL interval-timer stalls
+param set-default SDLOG_MODE 1

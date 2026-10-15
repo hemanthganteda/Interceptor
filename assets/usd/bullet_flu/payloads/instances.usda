@@ -1,0 +1,335 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "URDF USD Converter v0.3.2"
+    }
+    endTimeCode = 1000000
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    startTimeCode = 0
+    upAxis = "Z"
+)
+
+def Scope "Instances"
+{
+    def Xform "airframe_visual" (
+        prepend references = @./geometries.usd@</Geometries/airframe_visual>
+    )
+    {
+        over "airframe_visual" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding
+            prepend rel material:binding = </Instances/airframe_visual/VisualMaterials/carbon>
+            custom string urdf:name = "airframe_visual"
+
+            over "stl_00ffff" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Instances/airframe_visual/VisualMaterials/stl_00ffff>
+            }
+
+            over "stl_3a3a3a" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Instances/airframe_visual/VisualMaterials/stl_3a3a3a>
+            }
+
+            over "stl_9c9c9c" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Instances/airframe_visual/VisualMaterials/stl_9c9c9c>
+            }
+
+            over "stl_e66b00" (
+                prepend apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                rel material:binding = </Instances/airframe_visual/VisualMaterials/stl_e66b00>
+            }
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "carbon" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/carbon>
+            )
+            {
+            }
+
+            def Material "stl_00ffff" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/stl_00ffff>
+            )
+            {
+            }
+
+            def Material "stl_3a3a3a" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/stl_3a3a3a>
+            )
+            {
+            }
+
+            def Material "stl_9c9c9c" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/stl_9c9c9c>
+            )
+            {
+            }
+
+            def Material "stl_e66b00" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/stl_e66b00>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "motor_0_visual" (
+        prepend references = @./geometries.usd@</Geometries/motor_0_visual>
+    )
+    {
+        over "motor_0_visual" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding = </Instances/motor_0_visual/VisualMaterials/stl_9c9c9c>
+            custom string urdf:name = "motor_0_visual"
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "motor_grey" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/motor_grey>
+            )
+            {
+            }
+
+            def Material "stl_9c9c9c" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/stl_9c9c9c>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "motor_0_visual_1" (
+        prepend references = @./geometries.usd@</Geometries/motor_0_visual>
+    )
+    {
+        over "motor_0_visual" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding = </Instances/motor_0_visual_1/VisualMaterials/stl_9c9c9c>
+            custom string urdf:name = "motor_3_visual"
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "motor_grey" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/motor_grey>
+            )
+            {
+            }
+
+            def Material "stl_9c9c9c" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/stl_9c9c9c>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "motor_1_visual" (
+        prepend references = @./geometries.usd@</Geometries/motor_1_visual>
+    )
+    {
+        over "motor_1_visual" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding = </Instances/motor_1_visual/VisualMaterials/stl_9c9c9c>
+            custom string urdf:name = "motor_1_visual"
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "motor_grey" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/motor_grey>
+            )
+            {
+            }
+
+            def Material "stl_9c9c9c" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/stl_9c9c9c>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "motor_1_visual_1" (
+        prepend references = @./geometries.usd@</Geometries/motor_1_visual>
+    )
+    {
+        over "motor_1_visual" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding = </Instances/motor_1_visual_1/VisualMaterials/stl_9c9c9c>
+            custom string urdf:name = "motor_2_visual"
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "motor_grey" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/motor_grey>
+            )
+            {
+            }
+
+            def Material "stl_9c9c9c" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/stl_9c9c9c>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "rotor_0_visual" (
+        prepend references = @./geometries.usd@</Geometries/rotor_0_visual>
+    )
+    {
+        over "rotor_0_visual" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding = </Instances/rotor_0_visual/VisualMaterials/stl_9c9c9c>
+            custom string urdf:name = "rotor_0_visual"
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "rotor_dark" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/rotor_dark>
+            )
+            {
+            }
+
+            def Material "stl_9c9c9c" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/stl_9c9c9c>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "rotor_0_visual_1" (
+        prepend references = @./geometries.usd@</Geometries/rotor_0_visual>
+    )
+    {
+        over "rotor_0_visual" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding = </Instances/rotor_0_visual_1/VisualMaterials/stl_9c9c9c>
+            custom string urdf:name = "rotor_3_visual"
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "rotor_dark" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/rotor_dark>
+            )
+            {
+            }
+
+            def Material "stl_9c9c9c" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/stl_9c9c9c>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "rotor_1_visual" (
+        prepend references = @./geometries.usd@</Geometries/rotor_1_visual>
+    )
+    {
+        over "rotor_1_visual" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding = </Instances/rotor_1_visual/VisualMaterials/stl_9c9c9c>
+            custom string urdf:name = "rotor_1_visual"
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "rotor_dark" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/rotor_dark>
+            )
+            {
+            }
+
+            def Material "stl_9c9c9c" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/stl_9c9c9c>
+            )
+            {
+            }
+        }
+    }
+
+    def Xform "rotor_1_visual_1" (
+        prepend references = @./geometries.usd@</Geometries/rotor_1_visual>
+    )
+    {
+        over "rotor_1_visual" (
+            apiSchemas = ["MaterialBindingAPI"]
+        )
+        {
+            custom rel material:binding = </Instances/rotor_1_visual_1/VisualMaterials/stl_9c9c9c>
+            custom string urdf:name = "rotor_2_visual"
+        }
+
+        def Scope "VisualMaterials"
+        {
+            def Material "rotor_dark" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/rotor_dark>
+            )
+            {
+            }
+
+            def Material "stl_9c9c9c" (
+                instanceable = true
+                prepend references = @./materials.usda@</Materials/stl_9c9c9c>
+            )
+            {
+            }
+        }
+    }
+}
+
